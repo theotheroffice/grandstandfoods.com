@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandstand Foods — ASEAN F&B Distribution</title>
+<style>
+  /* ── Tokens ── */
+  :root {
+    --ink:       #1A1A18;
+    --paper:     #F7F4EE;
+    --forest:    #2A5C45;
+    --gold:      #C8922A;
+    --mist:      #E8E3D8;
+    --white:     #FFFFFF;
+    --text-body: #3D3D38;
+    --text-mute: #7A7A72;
+
+    --ff-display: 'Georgia', 'Times New Roman', serif;
+    --ff-body:    'Helvetica Neue', Arial, sans-serif;
+    --ff-label:   'Helvetica Neue', Arial, sans-serif;
+
+    --r: 4px;
+    --max: 1120px;
+    --nav-h: 68px;
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(247,244,238,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--mist);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo {
+    width: 38px; height: 38px;
+    background: var(--forest);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo svg { width: 22px; height: 22px; }
+  .nav-wordmark {
+    font-family: var(--ff-display);
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .nav-wordmark span { color: var(--forest); }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-body);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-cta {
+    background: var(--forest); color: var(--white);
+    padding: 9px 20px;
+    border-radius: var(--r);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: #1d4432; }
+
+  /* ── Hero ── */
+  .hero {
+    padding-top: calc(var(--nav-h) + 80px);
+    padding-bottom: 100px;
+    padding-left: 40px; padding-right: 40px;
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--ff-label);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 20px; height: 2px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: var(--ff-display);
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--forest);
+  }
+  .hero p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--forest); color: var(--white);
+    padding: 14px 28px; border-radius: var(--r);
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: #1d4432; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--forest); color: var(--forest);
+    padding: 14px 28px; border-radius: var(--r);
+    font-size: 14px; font-weight: 600;
+    transition: background .2s, color .2s;
+  }
+  .btn-outline:hover { background: var(--forest); color: var(--white); }
+
+  .hero-visual {
+    position: relative;
+  }
+  .hero-card {
+    background: var(--forest);
+    border-radius: 12px;
+    padding: 48px 40px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(200,146,42,0.25);
+  }
+  .hero-card::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -30px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-card-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 28px; margin-bottom: 32px;
+  }
+  .stat-val {
+    font-family: var(--ff-display);
+    font-size: 42px;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .stat-val span { color: var(--gold); }
+  .stat-lbl {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.03em;
+  }
+  .hero-card-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+
+  /* ── Section wrapper ── */
+  .section {
+    padding: 96px 40px;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--ff-label);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block; width: 20px; height: 2px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section-lead {
+    font-size: 16px;
+    color: var(--text-body);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* ── Opportunity band ── */
+  .opportunity-band {
+    background: var(--ink);
+    padding: 96px 40px;
+  }
+  .opportunity-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .opportunity-band .section-eyebrow { color: var(--gold); }
+  .opportunity-band .section-title { color: var(--white); margin-bottom: 56px; }
+  .opp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .opp-item {
+    background: #232320;
+    padding: 36px 32px;
+    transition: background .2s;
+  }
+  .opp-item:hover { background: #2c2c28; }
+  .opp-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--forest);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .opp-icon svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.8; }
+  .opp-item h3 {
+    font-family: var(--ff-display);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .opp-item p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+  }
+
+  /* ── Products ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--mist);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+  .product-card-img {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px;
+  }
+  .product-card-body { padding: 28px 28px 32px; }
+  .product-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--forest);
+    background: rgba(42,92,69,0.1);
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .product-card h3 {
+    font-family: var(--ff-display);
+    font-size: 20px; font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .product-card p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+  .product-features {
+    margin-top: 16px;
+    list-style: none;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .product-features li {
+    font-size: 11px;
+    background: var(--mist);
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: var(--text-body);
+  }
+
+  /* ── Spotlight (Sarawak) ── */
+  .spotlight-band {
+    background: var(--forest);
+    padding: 96px 40px;
+  }
+  .spotlight-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .spotlight-band .section-eyebrow { color: rgba(255,255,255,0.55); }
+  .spotlight-band .section-title { color: var(--white); margin-bottom: 24px; }
+  .spotlight-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .spotlight-items { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .spotlight-items li {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 15px; color: rgba(255,255,255,0.8);
+  }
+  .spotlight-items li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    margin-top: 8px;
+  }
+  .spotlight-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .sp-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 28px 24px;
+    backdrop-filter: blur(4px);
+  }
+  .sp-card-emoji { font-size: 36px; margin-bottom: 12px; }
+  .sp-card h4 {
+    font-family: var(--ff-display);
+    font-size: 16px; font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .sp-card p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* ── History ── */
+  .history-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .history-quote {
+    font-family: var(--ff-display);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--forest);
+    line-height: 1.5;
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    margin: 32px 0;
+  }
+  .history-text p {
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .history-pillars { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .history-pillars li {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .pillar-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .pillar-text strong { display: block; font-size: 15px; margin-bottom: 2px; color: var(--ink); }
+  .pillar-text span { font-size: 14px; color: var(--text-body); }
+  .history-visual {
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 48px 40px;
+    position: sticky; top: calc(var(--nav-h) + 24px);
+  }
+  .hv-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 24px;
+  }
+  .timeline { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 20px; position: relative; }
+  .tl-item:not(:last-child) .tl-line {
+    position: absolute; left: 15px; top: 32px;
+    width: 2px; bottom: 0;
+    background: var(--mist);
+    /* override mist: need visible line */
+    background: #D0CAB8;
+  }
+  .tl-dot {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--forest);
+    border: 3px solid var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .tl-dot svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 2; }
+  .tl-body { padding-bottom: 32px; }
+  .tl-year { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .tl-text { font-size: 14px; color: var(--text-body); line-height: 1.55; }
+
+  /* ── Team ── */
+  .team-band {
+    background: var(--mist);
+    padding: 96px 40px;
+  }
+  .team-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .team-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 860px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .team-avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: var(--forest);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-display);
+    font-size: 36px;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .team-name {
+    font-family: var(--ff-display);
+    font-size: 26px; font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .team-title {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .team-bio {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .team-credentials {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .cred {
+    font-size: 12px;
+    background: var(--mist);
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: var(--text-body);
+  }
+
+  /* ── Contact ── */
+  .contact-band {
+    background: var(--ink);
+    padding: 96px 40px;
+  }
+  .contact-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .contact-band .section-eyebrow { color: var(--gold); }
+  .contact-band .section-title { color: var(--white); margin-bottom: 16px; }
+  .contact-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .contact-details { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+  .contact-details li { display: flex; gap: 16px; align-items: center; }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--gold); stroke-width: 1.8; }
+  .contact-lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+  .contact-val { font-size: 15px; color: var(--white); }
+  .contact-val a { color: var(--gold); }
+  .contact-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 48px 40px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .contact-card h3 {
+    font-family: var(--ff-display);
+    font-size: 22px; font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .contact-card p {
+    font-size: 14px; color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .cf-field { margin-bottom: 20px; }
+  .cf-field label {
+    display: block; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .cf-field input,
+  .cf-field textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--r);
+    padding: 12px 16px;
+    color: var(--white);
+    font-size: 15px;
+    font-family: var(--ff-body);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .cf-field input::placeholder,
+  .cf-field textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .cf-field input:focus,
+  .cf-field textarea:focus { border-color: var(--gold); }
+  .cf-field textarea { resize: vertical; min-height: 100px; }
+  .cf-submit {
+    width: 100%;
+    background: var(--gold); color: var(--white);
+    border: none; cursor: pointer;
+    padding: 14px;
+    border-radius: var(--r);
+    font-size: 14px; font-weight: 600;
+    font-family: var(--ff-body);
+    letter-spacing: 0.04em;
+    transition: background .2s;
+  }
+  .cf-submit:hover { background: #b37e22; }
+  .cf-submit:disabled {
+    opacity: 0.6; cursor: not-allowed;
+  }
+
+  /* ── Form validation ── */
+  .cf-field .cf-error {
+    display: none;
+    font-size: 11px;
+    color: #f87171;
+    margin-top: 6px;
+    letter-spacing: 0.03em;
+  }
+  .cf-field.has-error input,
+  .cf-field.has-error textarea {
+    border-color: #f87171;
+    background: rgba(248,113,113,0.08);
+  }
+  .cf-field.has-error .cf-error { display: block; }
+  .cf-field.is-valid input,
+  .cf-field.is-valid textarea {
+    border-color: #4ade80;
+  }
+
+  /* ── Success state ── */
+  .cf-success {
+    display: none;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .cf-success-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(74,222,128,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .cf-success-icon svg { width: 28px; height: 28px; stroke: #4ade80; fill: none; stroke-width: 2.5; }
+  .cf-success h4 {
+    font-family: var(--ff-display);
+    font-size: 22px; font-weight: 400;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .cf-success p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ── Footer ── */
+  footer {
+    background: #0f0f0e;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand {
+    font-family: var(--ff-display);
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+  }
+  .footer-brand span { color: rgba(255,255,255,0.7); }
+  footer p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    max-width: var(--max);
+    margin: 0 auto;
+    border: none;
+    border-top: 1px solid var(--mist);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero, .history-layout, .spotlight-inner, .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .section { padding: 64px 20px; }
+    .opp-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .spotlight-cards { grid-template-columns: 1fr 1fr; }
+    .team-card { grid-template-columns: 1fr; gap: 24px; }
+    .opportunity-band, .spotlight-band, .team-band, .contact-band { padding: 64px 20px; }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 20px; }
+    .history-visual { position: static; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">Grandstand <span>Foods</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#opportunity">Opportunity</a></li>
+    <li><a href="#heritage">Heritage</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- ── Hero ── -->
+<section>
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Singapore · ASEAN F&B Distribution</div>
+      <h1>Introducing <em>unique</em> flavours of ASEAN foods & beverages</h1>
+      <p>Grandstand Foods connects the rich culinary heritage of Southeast Asia — from Sarawak jungle fruits to heritage sauces — with distributors and buyers in over 40 countries.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">Explore Products</a>
+        <a href="#contact" class="btn-outline">Speak With Us</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-label">Our Reach</div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">40<span>+</span></div>
+            <div class="stat-lbl">Countries distributed to</div>
+          </div>
+          <div>
+            <div class="stat-val">8<span>+</span></div>
+            <div class="stat-lbl">ASEAN cuisines sourced</div>
+          </div>
+          <div>
+            <div class="stat-val">3</div>
+            <div class="stat-lbl">Core product categories</div>
+          </div>
+          <div>
+            <div class="stat-val">2017</div>
+            <div class="stat-lbl">Founded in Singapore</div>
+          </div>
+        </div>
+        <p class="hero-card-desc">Bridging ASEAN's best SME food producers with global distribution networks and institutional buyers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Products ── -->
+<section class="section" id="products">
+  <div class="section-eyebrow">What We Distribute</div>
+  <h2 class="section-title">Three pillars of ASEAN flavour</h2>
+  <p class="section-lead">Our portfolio spans the most characterful and commercially viable categories in Southeast Asian food & beverage, with a strong bias toward Asian-forward flavours.</p>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-card-img" style="background:#F0F8F4;">🥫</div>
+      <div class="product-card-body">
+        <span class="product-tag">Category 01</span>
+        <h3>Sauces, Seasonings & Condiments</h3>
+        <p>A curated range of cooking flavours, chili mixes, dipping sauces, soup bases, jams and preservatives — characterised by customised products and sticky institutional customers.</p>
+        <ul class="product-features">
+          <li>Cooking flavours</li>
+          <li>Chili mixes</li>
+          <li>Dipping sauces</li>
+          <li>Soup bases</li>
+          <li>Jams & preservatives</li>
+        </ul>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-img" style="background:#FFF8F0;">🍜</div>
+      <div class="product-card-body">
+        <span class="product-tag">Category 02</span>
+        <h3>Noodles & Asian Staples</h3>
+        <p>A large sector offering sustainable economic scale. Established players with strong distribution enable access to further bolt-on acquisitions. We differentiate through OEM & house brand partnerships.</p>
+        <ul class="product-features">
+          <li>OEM production</li>
+          <li>House branding</li>
+          <li>Institutional supply</li>
+          <li>Bolt-on acquisitions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-img" style="background:#F5F0FC;">🧃</div>
+      <div class="product-card-body">
+        <span class="product-tag">Category 03</span>
+        <h3>Beverages</h3>
+        <p>A scale-demanding category where we differentiate through innovative products, smart packaging design, and Asian-based flavours that global players overlook.</p>
+        <ul class="product-features">
+          <li>Innovative formulations</li>
+          <li>Smart packaging</li>
+          <li>Asian flavour profiles</li>
+          <li>Niche positioning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── Opportunity ── -->
+<div class="opportunity-band" id="opportunity">
+  <div class="opportunity-inner">
+    <div class="section-eyebrow">Why Now</div>
+    <h2 class="section-title" style="color:var(--white);">The ASEAN F&B opportunity</h2>
+    <div class="opp-grid">
+      <div class="opp-item">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke-linejoin="round"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Packaged food demand is swelling</h3>
+        <p>As developing countries grow, demand for packaged foods expands rapidly. People need to eat and drink — delivery systems change, but the need never goes away.</p>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Global buyers seek distinctive sources</h3>
+        <p>Developed-world buyers are actively looking for lower-cost, culturally distinctive foods and beverages from international sources — exactly what ASEAN offers.</p>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>SME producers need a gateway</h3>
+        <p>Low barriers to entry create many sub-scale SMEs with excellent products but limited resources for growth and internationalisation. We provide that bridge.</p>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Halal markets are under-exploited</h3>
+        <p>Global demand for Halal-certified products is fast-growing, driven by rising Muslim populations worldwide. Most markets remain significantly under-served.</p>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Healthier products are opportunities</h3>
+        <p>Incumbents struggle with the shift to healthier food and drinks. For newcomers with agile supply chains, this is a clear competitive advantage.</p>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>Food safety as a differentiator</h3>
+        <p>Food safety concerns in Asia are both a challenge and an opportunity. Producers who meet international standards command a premium and earn lasting trust.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Sarawak Spotlight ── -->
+<div class="spotlight-band" id="heritage">
+  <div class="spotlight-inner">
+    <div>
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.5)">Heritage Ingredients</div>
+      <h2 class="section-title" style="color:var(--white)">The flavours of Sarawak</h2>
+      <p class="spotlight-desc">Sarawak, the Land of the Hornbill, is home to extraordinary indigenous ingredients unavailable anywhere else in the world. Grandstand Foods works to bring these rare, high-value products to global markets.</p>
+      <ul class="spotlight-items">
+        <li>Terung Asam Sarawak (TAS) — available as juice, jam, in syrup, and fresh fruit</li>
+        <li>Dabai — the "Sarawak olive," rich and buttery with significant export potential</li>
+        <li>Grafting innovation extends TAS viability for commercial planting</li>
+        <li>Direct relationships with Sarawakian producers and growers</li>
+      </ul>
+    </div>
+    <div class="spotlight-cards">
+      <div class="sp-card">
+        <div class="sp-card-emoji">🍅</div>
+        <h4>Terung Asam Sarawak</h4>
+        <p>A uniquely sour fruit native to Sarawak, used in traditional cooking and increasingly in premium condiments and beverages.</p>
+      </div>
+      <div class="sp-card">
+        <div class="sp-card-emoji">🫒</div>
+        <h4>Dabai Fruit</h4>
+        <p>Known as the Sarawak olive. Rich, flavourful, and deeply seasonal — a premium ingredient with a compelling story for international buyers.</p>
+      </div>
+      <div class="sp-card">
+        <div class="sp-card-emoji">🥤</div>
+        <h4>TAS Juice & Jam</h4>
+        <p>Value-added products that extend the shelf life of TAS and open export markets previously inaccessible to fresh fruit producers.</p>
+      </div>
+      <div class="sp-card">
+        <div class="sp-card-emoji">🌿</div>
+        <h4>Grafting Innovation</h4>
+        <p>Grafted TAS with Terung Pipit combats soil-borne disease, enabling sustainable commercial cultivation at scale.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── History ── -->
+<section class="section" id="about">
+  <div class="history-layout">
+    <div class="history-text">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">Born over coffee in Singapore</h2>
+      <p>Grandstand Foods Holding was conceived in mid-2017 by its founder Jonathan Hui, over a conversation at The Grandstand in Singapore. The founding question was simple but powerful.</p>
+      <blockquote class="history-quote">"What if F&B SMEs in ASEAN had access to the capital, networks and management expertise they need to grow?"</blockquote>
+      <p>That question became the business. Grandstand Foods provides the four things that hold most great ASEAN food producers back from realising their full potential.</p>
+      <ul class="history-pillars">
+        <li>
+          <div class="pillar-num">1</div>
+          <div class="pillar-text">
+            <strong>Substantial capital</strong>
+            <span>New investment for capacity expansion, not just working capital.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pillar-num">2</div>
+          <div class="pillar-text">
+            <strong>International distribution</strong>
+            <span>An immediate network of F&B distributors across 40 countries.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pillar-num">3</div>
+          <div class="pillar-text">
+            <strong>Management practices</strong>
+            <span>Improved quality assurance and operational efficiency from day one.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pillar-num">4</div>
+          <div class="pillar-text">
+            <strong>Exit pathway</strong>
+            <span>A route for owners to exit at higher valuations, at the right time.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="history-visual">
+      <div class="hv-label">Timeline</div>
+      <ul class="timeline">
+        <li class="tl-item">
+          <div class="tl-dot">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="tl-line"></div>
+          <div class="tl-body">
+            <div class="tl-year">2017</div>
+            <div class="tl-text">Grandstand Foods founded over coffee at The Grandstand, Singapore, by Jonathan Hui.</div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-dot">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="tl-line"></div>
+          <div class="tl-body">
+            <div class="tl-year">2018–2020</div>
+            <div class="tl-text">First producer partnerships established across Singapore, Malaysia, and the ASEAN region, including Sarawakian ingredient sourcing.</div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-dot">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="tl-line"></div>
+          <div class="tl-body">
+            <div class="tl-year">2021–2023</div>
+            <div class="tl-text">Distribution network expanded. International buyers engaged across 40+ countries for sauces, noodles, and beverage categories.</div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-dot">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="tl-body">
+            <div class="tl-year">Today</div>
+            <div class="tl-text">Grandstand Foods actively seeks new producer partners and institutional buyers. Coffee is still the preferred way to begin a conversation.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Team ── -->
+<div class="team-band">
+  <div class="team-inner">
+    <div class="section-eyebrow">Leadership</div>
+    <h2 class="section-title">Who we are</h2>
+    <p class="section-lead" style="margin-bottom:40px;">A founding team with deep financial, operational, and regional expertise.</p>
+    <div class="team-card">
+      <div class="team-avatar">JH</div>
+      <div>
+        <h3 class="team-name">Jonathan Hui</h3>
+        <div class="team-title">Founder & Managing Director</div>
+        <p class="team-bio">Jonathan brings substantial experience in financial services, having worked for Arthur Andersen, Merrill Lynch and UBS over a span of 15 years. He founded Asiaborders Capital in 1994 and has invested in promising SMEs across aviation, food & beverages, marine & offshore, and the TMT industries. He takes an active role in nurturing companies through their rapid expansion phase, until an experienced management team and expansion capital are in place.</p>
+        <div class="team-credentials">
+          <span class="cred">B.A. Economics — University of Leeds</span>
+          <span class="cred">Chartered Accountant (Singapore)</span>
+          <span class="cred">Chartered Accountant (England & Wales)</span>
+          <span class="cred">Asiaborders Capital</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Contact ── -->
+<div class="contact-band" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-eyebrow">Get In Touch</div>
+      <h2 class="section-title">Let's have a coffee</h2>
+      <p class="contact-sub">If you are a food producer looking to internationalise, or a buyer seeking distinctive ASEAN products, we'd love to begin a conversation.</p>
+      <ul class="contact-details">
+        <li>
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <div class="contact-lbl">Contact</div>
+            <div class="contact-val">Jonathan Hui</div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-lbl">Email</div>
+            <div class="contact-val"><a href="mailto:jon@grandstandfoods.com">jon@grandstandfoods.com</a></div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.09 6.09l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-lbl">Office</div>
+            <div class="contact-val">+65 6243 6949</div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-lbl">Base</div>
+            <div class="contact-val">Singapore</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="contact-card">
+      <h3>Send us a message</h3>
+      <p>We'll get back to you within one business day.</p>
+
+      <!-- Form -->
+      <div id="cf-form">
+        <div class="cf-field" id="field-name">
+          <label for="cf-name">Your Name <span style="color:#f87171">*</span></label>
+          <input type="text" id="cf-name" placeholder="Full name" autocomplete="name">
+          <div class="cf-error" id="err-name">Please enter your full name.</div>
+        </div>
+        <div class="cf-field" id="field-email">
+          <label for="cf-email">Email Address <span style="color:#f87171">*</span></label>
+          <input type="email" id="cf-email" placeholder="you@company.com" autocomplete="email">
+          <div class="cf-error" id="err-email">Please enter a valid email address.</div>
+        </div>
+        <div class="cf-field" id="field-role">
+          <label for="cf-role">I am a… <span style="color:#f87171">*</span></label>
+          <select id="cf-role" style="width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r);padding:12px 16px;color:var(--white);font-size:15px;font-family:var(--ff-body);outline:none;transition:border-color .2s;appearance:none;cursor:pointer;">
+            <option value="" style="background:#1A1A18">Select your role…</option>
+            <option value="Producer" style="background:#1A1A18">Producer / Manufacturer</option>
+            <option value="Buyer" style="background:#1A1A18">Buyer / Distributor</option>
+            <option value="Investor" style="background:#1A1A18">Investor</option>
+            <option value="Other" style="background:#1A1A18">Other</option>
+          </select>
+          <div class="cf-error" id="err-role">Please select your role.</div>
+        </div>
+        <div class="cf-field" id="field-message">
+          <label for="cf-message">Message <span style="color:#f87171">*</span></label>
+          <textarea id="cf-message" placeholder="Tell us a bit about what you're looking for…" rows="4"></textarea>
+          <div class="cf-error" id="err-message">Please enter a message (at least 20 characters).</div>
+        </div>
+        <button class="cf-submit" id="cf-submit" onclick="submitContactForm()">Send Message</button>
+      </div>
+
+      <!-- Success state -->
+      <div class="cf-success" id="cf-success">
+        <div class="cf-success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4>Message sent!</h4>
+        <p>Thank you for reaching out. Jonathan will be in touch within one business day.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-brand"><span>Grandstand Foods</span> Holding</div>
+  <p>© 2026 Grandstand Foods Holding. Singapore.</p>
+</footer>
+
+<script>
+  // ── Helpers ──
+  function getField(id) { return document.getElementById('field-' + id); }
+  function getInput(id) { return document.getElementById('cf-' + id); }
+
+  function setError(id, msg) {
+    const field = getField(id);
+    const err   = document.getElementById('err-' + id);
+    field.classList.add('has-error');
+    field.classList.remove('is-valid');
+    if (msg) err.textContent = msg;
+  }
+
+  function setValid(id) {
+    const field = getField(id);
+    field.classList.remove('has-error');
+    field.classList.add('is-valid');
+  }
+
+  function clearState(id) {
+    const field = getField(id);
+    field.classList.remove('has-error', 'is-valid');
+  }
+
+  // ── Live validation (on blur) ──
+  function validateName(live) {
+    const val = getInput('name').value.trim();
+    if (!val) { setError('name', 'Please enter your full name.'); return false; }
+    if (val.length < 2) { setError('name', 'Name must be at least 2 characters.'); return false; }
+    if (!/^[a-zA-Z\s'\-\.]+$/.test(val)) { setError('name', 'Name contains invalid characters.'); return false; }
+    setValid('name'); return true;
+  }
+
+  function validateEmail(live) {
+    const val = getInput('email').value.trim();
+    const re  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!val) { setError('email', 'Please enter your email address.'); return false; }
+    if (!re.test(val)) { setError('email', 'Please enter a valid email address.'); return false; }
+    setValid('email'); return true;
+  }
+
+  function validateRole() {
+    const val = getInput('role').value;
+    if (!val) { setError('role', 'Please select your role.'); return false; }
+    setValid('role'); return true;
+  }
+
+  function validateMessage() {
+    const val = getInput('message').value.trim();
+    if (!val) { setError('message', 'Please enter a message.'); return false; }
+    if (val.length < 20) { setError('message', 'Please enter at least 20 characters.'); return false; }
+    if (val.length > 2000) { setError('message', 'Message is too long (max 2000 characters).'); return false; }
+    setValid('message'); return true;
+  }
+
+  // Attach blur listeners for live feedback
+  getInput('name').addEventListener('blur',    () => validateName(true));
+  getInput('email').addEventListener('blur',   () => validateEmail(true));
+  getInput('role').addEventListener('change',  () => validateRole());
+  getInput('message').addEventListener('blur', () => validateMessage());
+
+  // Clear error state on focus
+  ['name','email','role','message'].forEach(id => {
+    const el = getInput(id);
+    el.addEventListener('focus', () => clearState(id));
+  });
+
+  // ── Submit ──
+  function submitContactForm() {
+    const okName    = validateName();
+    const okEmail   = validateEmail();
+    const okRole    = validateRole();
+    const okMessage = validateMessage();
+
+    if (!okName || !okEmail || !okRole || !okMessage) {
+      // Scroll to first error
+      const firstError = document.querySelector('.cf-field.has-error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Build mailto link
+    const name    = getInput('name').value.trim();
+    const email   = getInput('email').value.trim();
+    const role    = getInput('role').value;
+    const message = getInput('message').value.trim();
+
+    const subject = encodeURIComponent('Grandstand Foods Enquiry — ' + role);
+    const body    = encodeURIComponent(
+      'Name: '    + name    + '\n' +
+      'Email: '   + email   + '\n' +
+      'Role: '    + role    + '\n\n' +
+      'Message:\n' + message
+    );
+
+    // Disable button to prevent double-submit
+    const btn = document.getElementById('cf-submit');
+    btn.disabled = true;
+    btn.textContent = 'Opening email…';
+
+    // Open mailto
+    window.location.href = 'mailto:jon@grandstandfoods.com?subject=' + subject + '&body=' + body;
+
+    // Show success state after short delay
+    setTimeout(() => {
+      document.getElementById('cf-form').style.display = 'none';
+      const success = document.getElementById('cf-success');
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 800);
+  }
+
+  // Allow Enter key in inputs (but not textarea) to advance / submit
+  ['cf-name','cf-email'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const inputs = ['cf-name','cf-email','cf-role','cf-message'];
+        const idx = inputs.indexOf(id);
+        if (idx < inputs.length - 1) document.getElementById(inputs[idx+1]).focus();
+      }
+    });
+  });
+</script>
+</body>
+</html>
